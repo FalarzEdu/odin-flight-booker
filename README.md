@@ -67,3 +67,14 @@ These are the main Domain Rules that will dictate the development of this projec
 The chosen DMBS is PostgreSQL. This decision comes from the fact that this tool is popular, and its usage is very
 widespread.
 
+## Docker Development
+
+For local development, this project includes a `development` target in `Dockerfile` plus `docker-compose.yml`.
+
+```bash
+docker compose up --build
+docker compose exec app bin/rails db:prepare
+```
+
+The app is available at `http://localhost:3000` and PostgreSQL at `localhost:5432`.
+
