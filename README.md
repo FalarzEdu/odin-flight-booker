@@ -36,11 +36,11 @@ to address them all.
 The purpose of this project is to build a Flight Booker, making use of the many useful
 resources given out-of-the-box by Rails.
 The main functionalities are basically Flight Bookings by users, with the option to add one or more
-passengers to every booking. The app is going to be built with scalability in mind - and this will
+passengers to every booking. The app is going to be built with scalability in mind—and this will
 reflect some decisions along the way. Some of these features won't be used right away, but the idea is to
 construct the project looking to a farther horizon.
 
-These are the main Domain Rules which will dictate the developemnt of this project:
+These are the main Domain Rules that will dictate the development of this project:
 
 > The implementation of anything related to payment will only be mocked.
 > No owned or third-party payment gateways will be used.
