@@ -55,6 +55,30 @@ RUN bundle exec bootsnap precompile -j 1 app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
+# Development stage for local containerized workflow
+FROM base AS development
+
+# Dev uses non-deployment Bundler mode and includes all gem groups.
+ENV RAILS_ENV="development" \
+    BUNDLE_DEPLOYMENT="0" \
+    BUNDLE_WITHOUT=""
+
+# Install packages commonly needed by native gems and local tooling.
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips libyaml-dev pkg-config && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# Install gems early for better layer caching in local rebuilds.
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
+# Copy app source. In compose this is typically replaced by a bind mount.
+COPY . .
+
+EXPOSE 3000
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
+
+
 
 
 # Final stage for app image
