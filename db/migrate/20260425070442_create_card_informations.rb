@@ -1,6 +1,6 @@
-class CreateCardInformation < ActiveRecord::Migration[8.1]
+class CreateCardInformations < ActiveRecord::Migration[8.1]
   def change
-    create_table :card_information do |t|
+    create_table :card_informations do |t|
       t.references :user, null: false, foreign_key: true
       t.string :card_number
       t.string :card_owner
