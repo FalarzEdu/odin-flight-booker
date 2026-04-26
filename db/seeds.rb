@@ -63,3 +63,48 @@ routes.each do |route_details|
     arrival_airport_id: arrival_airport[:id]
   )
 end
+
+flights = [
+  {
+    departure_datetime: DateTime.now + 10.hours,
+    arrival_datetime: DateTime.now + 11.hours,
+    price: 1650,
+    capacity: 60,
+    flight_duration: 60,
+    from: "CWB",
+    to: "GRU"
+  },
+  {
+    departure_datetime: DateTime.now + 14.hours,
+    arrival_datetime: DateTime.now + 15.hours + 30.minutes,
+    price: 1650,
+    capacity: 60,
+    flight_duration: 90,
+    from: "CWB",
+    to: "CNF"
+  },
+  {
+    departure_datetime: DateTime.now + 18.hours,
+    arrival_datetime: DateTime.now + 19.hours + 10.minutes,
+    price: 1650,
+    capacity: 60,
+    flight_duration: 60,
+    from: "GRU",
+    to: "PLU"
+  }
+]
+
+flights.each do |flight_details|
+  route = Route.joins("JOIN airports AS dep ON dep.id = routes.departure_airport_id")
+                 .joins("JOIN airports AS arr ON arr.id = routes.arrival_airport_id")
+                 .find_by!(dep: { code: flight_details[:from] }, arr: { code: flight_details[:to] })
+
+  Flight.find_or_create_by!(
+    route_id: route[:id],
+    departure_datetime: flight_details[:departure_datetime],
+    arrival_datetime: flight_details[:arrival_datetime],
+    price: flight_details[:price],
+    capacity: flight_details[:capacity],
+    flight_duration: flight_details[:flight_duration]
+  )
+end
