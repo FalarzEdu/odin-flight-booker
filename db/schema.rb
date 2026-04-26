@@ -10,15 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_25_164317) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_26_023156) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "bookings", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.bigint "flight_id", null: false
     t.integer "status", default: 0
     t.decimal "total_paid", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "updated_at", null: false
+    t.index ["flight_id"], name: "index_bookings_on_flight_id"
   end
 
   create_table "card_informations", force: :cascade do |t|
@@ -38,6 +40,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_164317) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["card_information_id"], name: "index_card_payments_on_card_information_id"
+  end
+
+  create_table "flights", force: :cascade do |t|
+    t.datetime "arrival_datetime", null: false
+    t.integer "capacity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "departure_datetime", null: false
+    t.string "identifier_code", null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "passengers", force: :cascade do |t|
@@ -77,6 +89,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_25_164317) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "bookings", "flights"
   add_foreign_key "card_informations", "users"
   add_foreign_key "card_payments", "card_informations"
 end
