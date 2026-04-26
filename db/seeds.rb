@@ -44,3 +44,22 @@ airports.each do |airport_details|
     city_id: city[:id]
   )
 end
+
+routes = [
+  { distance: 285, departure_airport_code: "CWB", arrival_airport_code: "GRU" },
+  { distance: 1100, departure_airport_code: "CWB", arrival_airport_code: "BSB" },
+  { distance: 42.7, departure_airport_code: "CWB", arrival_airport_code: "CNF" },
+  { distance: 970, departure_airport_code: "VCP", arrival_airport_code: "BSB" },
+  { distance: 575, departure_airport_code: "GRU", arrival_airport_code: "PLU" }
+]
+
+routes.each do |route_details|
+  departure_airport = Airport.find_by(code: route_details[:departure_airport_code])
+  arrival_airport = Airport.find_by(code: route_details[:arrival_airport_code])
+
+  Route.find_or_create_by!(
+    distance: route_details[:distance],
+    departure_airport_id: departure_airport[:id],
+    arrival_airport_id: arrival_airport[:id]
+  )
+end
