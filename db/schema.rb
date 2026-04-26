@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_26_023156) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_26_033247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,6 +42,15 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_023156) do
     t.index ["card_information_id"], name: "index_card_payments_on_card_information_id"
   end
 
+  create_table "cities", force: :cascade do |t|
+    t.string "abbreviation", null: false
+    t.string "country", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.string "state", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "flights", force: :cascade do |t|
     t.datetime "arrival_datetime", null: false
     t.integer "capacity", null: false
@@ -49,7 +58,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_023156) do
     t.datetime "departure_datetime", null: false
     t.string "identifier_code", null: false
     t.decimal "price", precision: 10, scale: 2, null: false
+    t.bigint "route_id", null: false
     t.datetime "updated_at", null: false
+    t.index ["route_id"], name: "index_flights_on_route_id"
   end
 
   create_table "passengers", force: :cascade do |t|
@@ -79,6 +90,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_023156) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "routes", force: :cascade do |t|
+    t.bigint "arrival_city_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "departure_city_id", null: false
+    t.decimal "distance", precision: 8, scale: 2, null: false
+    t.datetime "updated_at", null: false
+    t.index ["arrival_city_id"], name: "index_routes_on_arrival_city_id"
+    t.index ["departure_city_id"], name: "index_routes_on_departure_city_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.date "date_of_birth"
@@ -92,4 +113,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_023156) do
   add_foreign_key "bookings", "flights"
   add_foreign_key "card_informations", "users"
   add_foreign_key "card_payments", "card_informations"
+  add_foreign_key "flights", "routes"
+  add_foreign_key "routes", "cities", column: "arrival_city_id"
+  add_foreign_key "routes", "cities", column: "departure_city_id"
 end
