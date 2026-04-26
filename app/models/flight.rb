@@ -1,5 +1,5 @@
 class Flight < ApplicationRecord
-  belongs_to :flight
+  belongs_to :route
 
   has_many :bookings
 end
