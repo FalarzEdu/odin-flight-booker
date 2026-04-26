@@ -26,10 +26,13 @@ cities.each do |city_details|
 end
 
 airports = [
-  { code: "GRU", city_abbreviation: "SAO" },
-  { code: "CGH", city_abbreviation: "SAO" },
-  { code: "VCP", city_abbreviation: "SAO" },
-  { code: "CWB", city_abbreviation: "CWB" }
+  { code: "GRU", name: "Guarulhos", city_abbreviation: "SAO" },
+  { code: "CGH", name: "Congonhas", city_abbreviation: "SAO" },
+  { code: "VCP", name: "Viracopos", city_abbreviation: "SAO" },
+  { code: "CWB", name: "Afonso Pena", city_abbreviation: "CWB" },
+  { code: "BSB", name: "Presidente Juscelino Kubitschek", city_abbreviation: "BSB" },
+  { code: "CNF", name: "Tancredo Neves", city_abbreviation: "BHZ" },
+  { code: "PLU", name: "Carlos Drummond de Andrade", city_abbreviation: "BHZ" }
 ]
 
 airports.each do |airport_details|
@@ -37,6 +40,7 @@ airports.each do |airport_details|
 
   Airport.find_or_create_by!(
     code: airport_details[:code],
+    name: airport_details[:name],
     city_id: city[:id]
   )
 end
