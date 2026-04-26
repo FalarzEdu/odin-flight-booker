@@ -1,6 +1,6 @@
 class Route < ApplicationRecord
-  belongs_to :departure_city, class_name: "City"
-  belongs_to :arrival_city, class_name: "City"
+  belongs_to :departure_airport, class_name: "Airport"
+  belongs_to :arrival_airports, class_name: "Airport"
 
   has_many :flights
 end

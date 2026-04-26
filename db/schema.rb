@@ -14,10 +14,18 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_033247) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "airports", force: :cascade do |t|
+    t.bigint "city_id", null: false
+    t.string "code", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_airports_on_city_id"
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "flight_id", null: false
-    t.integer "status", default: 0
+    t.integer "status", default: 0, null: false
     t.decimal "total_paid", precision: 10, scale: 2, default: "0.0", null: false
     t.datetime "updated_at", null: false
     t.index ["flight_id"], name: "index_bookings_on_flight_id"
@@ -91,13 +99,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_033247) do
   end
 
   create_table "routes", force: :cascade do |t|
-    t.bigint "arrival_city_id", null: false
+    t.bigint "arrival_airport_id", null: false
     t.datetime "created_at", null: false
-    t.bigint "departure_city_id", null: false
+    t.bigint "departure_airport_id", null: false
     t.decimal "distance", precision: 8, scale: 2, null: false
     t.datetime "updated_at", null: false
-    t.index ["arrival_city_id"], name: "index_routes_on_arrival_city_id"
-    t.index ["departure_city_id"], name: "index_routes_on_departure_city_id"
+    t.index ["arrival_airport_id"], name: "index_routes_on_arrival_airport_id"
+    t.index ["departure_airport_id"], name: "index_routes_on_departure_airport_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -110,10 +118,11 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_033247) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "airports", "cities"
   add_foreign_key "bookings", "flights"
   add_foreign_key "card_informations", "users"
   add_foreign_key "card_payments", "card_informations"
   add_foreign_key "flights", "routes"
-  add_foreign_key "routes", "cities", column: "arrival_city_id"
-  add_foreign_key "routes", "cities", column: "departure_city_id"
+  add_foreign_key "routes", "airports", column: "arrival_airport_id"
+  add_foreign_key "routes", "airports", column: "departure_airport_id"
 end
