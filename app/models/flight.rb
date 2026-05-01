@@ -27,7 +27,7 @@ class Flight < ApplicationRecord
   }
 
   scope :with_exact_departure_date, ->(date) {
-    where(departure_datetime: date)
+    where(departure_datetime: date.all_day)
   }
 
   def self.available_dates
