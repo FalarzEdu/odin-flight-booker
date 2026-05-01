@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_26_180805) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_01_182015) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,10 +73,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_180805) do
   end
 
   create_table "passengers", force: :cascade do |t|
+    t.bigint "booking_id", null: false
     t.datetime "created_at", null: false
     t.date "date_of_birth", null: false
     t.string "name", null: false
     t.datetime "updated_at", null: false
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -124,6 +126,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_26_180805) do
   add_foreign_key "card_informations", "users"
   add_foreign_key "card_payments", "card_informations"
   add_foreign_key "flights", "routes"
+  add_foreign_key "passengers", "bookings"
   add_foreign_key "routes", "airports", column: "arrival_airport_id"
   add_foreign_key "routes", "airports", column: "departure_airport_id"
 end
