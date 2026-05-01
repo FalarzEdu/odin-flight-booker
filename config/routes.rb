@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root "flights#index"
 
   devise_for :users
-  resources :flights
+  resources :flights, only: [ :index ]
+  resources :bookings, only: [ :new, :create ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
