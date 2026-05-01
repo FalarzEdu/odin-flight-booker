@@ -46,5 +46,7 @@
   <h3>Price</h3>
   <p><%= flight.price %></p>
 
+  <%= link_to "Book this flight", new_booking_path(params: { flight_id: flight.id }) %>
+
   <hr>
 <% end %>
