@@ -1,0 +1,15 @@
+<h3>Departure Airport</h3>
+<p><%= flight.route.departure_airport.name %> - <%= flight.route.departure_airport.code %></p>
+
+<h3>Arrival Airport</h3>
+<p><%= flight.route.arrival_airport.name %> - <%= flight.route.arrival_airport  .code %></p>
+
+<h3>Departure Date and time</h3>
+<p><%= flight.departure_datetime %></p>
+
+<h3>Price</h3>
+<p><%= flight.price %></p>
+
+<%= link_to "Book this flight", new_booking_path(params: { flight_id: flight.id }) %>
+
+<hr>

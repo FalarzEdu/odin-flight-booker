@@ -1,0 +1,9 @@
+<% if flights.any? %>
+  <h2><%= flights.count %> flights were found!</h2>
+
+  <% flights.each do |flight| %>
+    <%= render partial: "flight_card", locals: { flight: } %>
+  <% end %>
+<% else %>
+  <h2>No flights were found! Try another search.</h2>
+<% end %>

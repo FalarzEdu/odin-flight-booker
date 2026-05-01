@@ -1,1 +1,11 @@
 <h1>Create a new booking</h1>
+
+<%= form_with model: @booking do |form| %>
+  <%= form.fields_for :passengers do |passengers_form| %>
+    <%= passengers_form.label :name %>
+    <%= passengers_form.text_field :name %>
+
+    <%= passengers_form.label :date_of_birth %>
+    <%= passengers_form.date_field :date_of_birth %>
+  <% end %>
+<% end %>

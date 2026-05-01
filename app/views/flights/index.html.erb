@@ -20,9 +20,9 @@
                              } %>
 
   <%= form.label :departure_date, "Departure Date" %>
-  <%= form.select :departure_time,
+  <%= form.select :departure_date,
                   Flight.available_dates.map { |date| [date.strftime("%d/%m/%Y"), date] },
-                  { include_blank: "Any Date", selected: params[:departure_time] }
+                  { include_blank: "Any Date", selected: params[:departure_date] }
   %>
 
   <%= form.label :passengers_count, "Quantity of passengers" %>
@@ -31,22 +31,8 @@
   <%= form.submit "Search" %>
 <% end %>
 
-<h2><%= @flights.count %> flights were found!</h2>
-
-<% @flights.each do |flight| %>
-  <h3>Departure Airport</h3>
-  <p><%= flight.route.departure_airport.name %> - <%= flight.route.departure_airport.code %></p>
-
-  <h3>Arrival Airport</h3>
-  <p><%= flight.route.arrival_airport.name %> - <%= flight.route.arrival_airport  .code %></p>
-
-  <h3>Departure Date and time</h3>
-  <p><%= flight.departure_datetime %></p>
-
-  <h3>Price</h3>
-  <p><%= flight.price %></p>
-
-  <%= link_to "Book this flight", new_booking_path(params: { flight_id: flight.id }) %>
-
-  <hr>
+<% if !@flights.nil? %>
+  <%= render partial: "flight_list", locals: { flights: @flights } %>
+<% else %>
+  <h2>Make a search to find available flights!</h2>
 <% end %>

@@ -1,8 +1,10 @@
 class FlightsController < ApplicationController
   def index
-    @flights = Flight.upcoming
+    @flights = nil
 
     if filtering_params.present?
+      @flights = Flight.upcoming
+
       @flights = @flights.with_departure_airport(params[:departure_airport_id]) if params[:departure_airport_id].present?
       @flights = @flights.with_arrival_airport(params[:arrival_airport_id]) if params[:arrival_airport_id].present?
 
@@ -20,6 +22,6 @@ class FlightsController < ApplicationController
       :departure_airport_id,
       :arrival_airport_id,
       :departure_date
-    ).select { |key, value| value.present? }
+    ).select { |_, value| value.present? }
   end
 end
