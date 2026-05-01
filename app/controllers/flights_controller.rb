@@ -1,6 +1,6 @@
 class FlightsController < ApplicationController
   def index
-    @flights = Flight.all
+    @flights = Flight.upcoming
 
     if filtering_params.present?
       @flights = @flights.with_departure_airport(params[:departure_airport_id]) if params[:departure_airport_id].present?

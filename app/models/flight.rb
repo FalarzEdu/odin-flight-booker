@@ -16,6 +16,8 @@ class Flight < ApplicationRecord
 
   validates :route, presence: true
 
+  scope :upcoming, -> { where("departure_datetime >= ?", Date.current) }
+
   scope :with_departure_airport, ->(id) {
     joins(:route).where(routes: { departure_airport_id: id })
   }
@@ -29,6 +31,6 @@ class Flight < ApplicationRecord
   }
 
   def self.available_dates
-    all.map { |flight| flight.departure_datetime.to_date }.uniq.sort
+    upcoming.map { |flight| flight.departure_datetime.to_date }.uniq.sort
   end
 end
