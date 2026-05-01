@@ -1,0 +1,50 @@
+<h1>Odin's available flights</h1>
+
+<%= form_with url: "/flights", action: "index", method: :get do |form| %>
+  <%= form.label :departure_airport, "Departure Airport" %>
+  <%= form.collection_select :departure_airport_id,
+                             Airport.order(:name),
+                             :id, :name,
+                             {
+                               include_blank: "Select an Airport",
+                               selected: params[:departure_airport_id]
+                             } %>
+
+  <%= form.label :arrival_airport, "Arrival Airport" %>
+  <%= form.collection_select :arrival_airport_id,
+                             Airport.order(:name),
+                             :id, :name,
+                             {
+                               include_blank: "Select an Airport",
+                               selected: params[:arrival_airport_id]
+                             } %>
+
+  <%= form.label :departure_date, "Departure Date" %>
+  <%= form.select :departure_time,
+                  Flight.available_dates.map { |date| [date.strftime("%d/%m/%Y"), date] },
+                  { include_blank: "Any Date", selected: params[:departure_time] }
+  %>
+
+  <%= form.label :passengers_count, "Quantity of passengers" %>
+  <%= form.number_field :passengers_count, min: 1, max: 4, value: 1 %>
+
+  <%= form.submit "Search" %>
+<% end %>
+
+<h2><%= @flights.count %> flights were found!</h2>
+
+<% @flights.each do |flight| %>
+  <h3>Departure Airport</h3>
+  <p><%= flight.route.departure_airport.name %> - <%= flight.route.departure_airport.code %></p>
+
+  <h3>Arrival Airport</h3>
+  <p><%= flight.route.arrival_airport.name %> - <%= flight.route.arrival_airport  .code %></p>
+
+  <h3>Departure Date and time</h3>
+  <p><%= flight.departure_datetime %></p>
+
+  <h3>Price</h3>
+  <p><%= flight.price %></p>
+
+  <hr>
+<% end %>
