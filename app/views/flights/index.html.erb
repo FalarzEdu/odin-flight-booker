@@ -32,7 +32,9 @@
 <% end %>
 
 <% if !@flights.nil? %>
-  <%= render partial: "flight_list", locals: { flights: @flights } %>
+  <%= render partial: "flight_list",
+             locals: { flights: @flights, passengers_count: params[:passengers_count] }
+  %>
 <% else %>
   <h2>Make a search to find available flights!</h2>
 <% end %>
