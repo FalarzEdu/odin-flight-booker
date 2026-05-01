@@ -1,0 +1,11 @@
+<h2>Information about this booking</h2>
+
+<p>
+  Number of passengers: <%= passengers_count %>
+  <% if passengers_count.eql?(booking.passengers_limit) %>
+    (limit per booking reached)
+  <% end %>
+</p>
+<p>Flight Price: <%= flight.price %></p>
+<p>Departure date and time: <%= flight.departure_datetime %></p>
+<p>Estimated arrival date and time <%= flight.arrival_datetime %></p>

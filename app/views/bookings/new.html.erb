@@ -1,11 +1,18 @@
 <h1>Create a new booking</h1>
 
-<%= form_with model: @booking do |form| %>
-  <%= form.fields_for :passengers do |passengers_form| %>
-    <%= passengers_form.label :name %>
-    <%= passengers_form.text_field :name %>
+<%= render partial: "booking_information",
+           locals: {
+             booking: @booking,
+             passengers_count: @passengers_count,
+             flight: @flight
+           }
+%>
 
-    <%= passengers_form.label :date_of_birth %>
-    <%= passengers_form.date_field :date_of_birth %>
+<% if @booking.errors.any? %>
+  <h3>The following is preventing this booking creation:</h3>
+  <% @booking.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
   <% end %>
 <% end %>
+
+<%= render partial: "form", locals: { booking: @booking } %>

@@ -12,13 +12,25 @@ class Booking < ApplicationRecord
   validate :flight_must_be_in_the_future, on: :create
   validates :total_paid, presence: true,
             numericality: { greater_than_or_equal_to: 0 }
+  validates :passengers, presence: { message: "at least one passenger must be included" }
+  validate :passengers_count_within_limit, on: :create
   validates_associated :passengers
+
+  def passengers_limit
+    4
+  end
 
   private
 
   def flight_must_be_in_the_future
     if flight.present? && flight.departure_datetime < Date.current
       errors.add(:base, "Cannot book a flight that has already departed.")
+    end
+  end
+
+  def passengers_count_within_limit
+    if passengers.size > passengers_limit
+      errors.add(:base, "You can't book more than #{passengers_limit} at once.")
     end
   end
 end

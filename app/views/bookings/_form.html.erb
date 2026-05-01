@@ -1,0 +1,20 @@
+<%= form_with model: @booking do |form| %>
+  <section>
+    <h2>Passengers</h2>
+    <%= form.fields_for :passengers do |passengers_form| %>
+      <div style="display: block; margin-bottom: 2rem">
+        <p>Passenger <%= passengers_form.index + 1 %></p>
+
+        <%= passengers_form.label :name %>
+        <%= passengers_form.text_field :name %>
+
+        <%= passengers_form.label :date_of_birth %>
+        <%= passengers_form.date_field :date_of_birth %>
+      </div>
+    <% end %>
+  </section>
+
+  <%= form.hidden_field :flight_id %>
+
+  <%= form.submit %>
+<% end %>
