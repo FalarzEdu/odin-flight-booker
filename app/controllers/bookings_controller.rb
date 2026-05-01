@@ -1,5 +1,4 @@
 class BookingsController < ApplicationController
-
   def show
     @booking = Booking.find(params[:id])
   end
@@ -11,7 +10,7 @@ class BookingsController < ApplicationController
     else
       @booking = @flight.bookings.build
       requested_passengers_count = params[:passengers_count].to_i ||= nil
-      @passengers_count = [requested_passengers_count, @booking.passengers_limit].min
+      @passengers_count = [ requested_passengers_count, @booking.passengers_limit ].min
       @passengers_count.times { @booking.passengers.build } if @passengers_count
     end
   end
