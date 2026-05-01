@@ -1,7 +1,20 @@
 class Flight < ApplicationRecord
   belongs_to :route
-
   has_many :bookings
+
+  validates :departure_datetime, presence: true,
+            comparison: { greater_than_or_equal_to: -> { Time.current } }
+
+  validates :arrival_datetime, presence: true,
+            comparison: { greater_than: :departure_datetime }
+
+  validates :price, presence: true,
+            numericality: { greater_than_or_equal_to: 0 }
+
+  validates :capacity, :flight_duration, presence: true,
+            numericality: { greater_than: 0 }
+
+  validates :route, presence: true
 
   scope :with_departure_airport, ->(id) {
     joins(:route).where(routes: { departure_airport_id: id })
