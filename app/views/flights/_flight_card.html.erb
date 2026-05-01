@@ -1,16 +1,27 @@
-<h3>Departure Airport</h3>
-<p><%= flight.route.departure_airport.name %> - <%= flight.route.departure_airport.code %></p>
+<div class="info-card flight-card">
+  <div>
+    <h3>Departure Airport</h3>
+    <p><%= flight.route.departure_airport.name %> - <%= flight.route.departure_airport.code %></p>
+  </div>
 
-<h3>Arrival Airport</h3>
-<p><%= flight.route.arrival_airport.name %> - <%= flight.route.arrival_airport  .code %></p>
+  <div>
+    <h3>Arrival Airport</h3>
+    <p><%= flight.route.arrival_airport.name %> - <%= flight.route.arrival_airport  .code %></p>
+  </div>
 
-<h3>Departure Date and time</h3>
-<p><%= flight.departure_datetime %></p>
+  <div>
+    <h3>Departure Date and time</h3>
+    <p><%= flight.departure_datetime %></p>
+  </div>
 
-<h3>Price</h3>
-<p><%= flight.price %></p>
+  <div>
+    <h3>Price</h3>
+    <p><%= flight.price %></p>
+  </div>
 
-<%= link_to "Book this flight",
-            new_booking_path(params: { flight_id: flight.id, passengers_count: }) %>
-
-<hr>
+  <div class="card-actions">
+    <%= link_to "Book this flight",
+                new_booking_path(params: { flight_id: flight.id, passengers_count: }),
+                class: "btn" %>
+  </div>
+</div>
