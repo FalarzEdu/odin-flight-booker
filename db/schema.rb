@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_01_182015) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_02_185126) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -34,13 +34,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_01_182015) do
 
   create_table "card_informations", force: :cascade do |t|
     t.boolean "active"
-    t.string "card_number"
-    t.string "card_owner"
-    t.string "card_owner_document"
-    t.integer "card_verification_number"
     t.datetime "created_at", null: false
+    t.string "number"
+    t.string "owner_document"
+    t.string "owner_full_name"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.integer "verification_number"
     t.index ["user_id"], name: "index_card_informations_on_user_id"
   end
 
