@@ -1,3 +1,10 @@
+<% if current_user.errors.any? %>
+  <h3>The following is preventing this booking creation:</h3>
+  <% current_user.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
 <%= form_with model: current_user, url: profile_path, method: :patch do |form| %>
   <%= form.label :name, "Name" %>
   <%= form.text_field :name %>
