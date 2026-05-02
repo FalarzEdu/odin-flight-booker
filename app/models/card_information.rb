@@ -6,5 +6,5 @@ class CardInformation < ApplicationRecord
   validates :active, inclusion: { in: [true, false] }
   validates :user, presence: true
 
-  enum :active, { inactive: 0, active: 1 }, default: :active
+  scope :active, -> { where(active: true) }
 end

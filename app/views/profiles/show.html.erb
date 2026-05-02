@@ -27,4 +27,4 @@
   </div>
 </div>
 
-<%= render partial: "card_informations/card_informations", locals: { card_informations: current_user.card_informations } %>
+<%= render partial: "card_informations/card_informations", locals: { card_informations: current_user.card_informations.active } %>

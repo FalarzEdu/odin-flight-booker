@@ -1,10 +1,10 @@
 class CardInformationsController < ApplicationController
   def index
-    @card_information = CardInformations.all
+    @card_information = current_user.card_informations.active
   end
 
   def new
-    @card_information = CardInformation.new
+    @card_information = current_user.card_informations.build
   end
 
   def create
