@@ -1,0 +1,6 @@
+<% if model.errors.any? %>
+  <h3>The following is preventing this booking creation:</h3>
+  <% model.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>

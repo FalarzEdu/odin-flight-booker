@@ -1,0 +1,9 @@
+<%= form_with model: current_user, url: profile_path, method: :patch do |form| %>
+  <%= form.label :name, "Name" %>
+  <%= form.text_field :name %>
+
+  <%= form.label :date_of_birth, "Date of Birth" %>
+  <%= form.date_field :date_of_birth %>
+
+  <%= form.submit %>
+<% end %>

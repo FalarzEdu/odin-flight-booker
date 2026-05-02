@@ -8,11 +8,6 @@
            }
 %>
 
-<% if @booking.errors.any? %>
-  <h3>The following is preventing this booking creation:</h3>
-  <% @booking.errors.full_messages.each do |message| %>
-    <p><%= message %></p>
-  <% end %>
-<% end %>
+<%= render partial: "shared/form_error_preview", locals: { model: @booking } %>
 
 <%= render partial: "form", locals: { booking: @booking } %>
