@@ -1,9 +1,16 @@
 <%= form_with model: current_user, url: profile_path, method: :patch do |form| %>
-  <%= form.label :name, "Name" %>
-  <%= form.text_field :name %>
+  <div>
+    <%= form.label :name, "Name" %>
+    <%= form.text_field :name, placeholder: "Enter your full name" %>
+  </div>
 
-  <%= form.label :date_of_birth, "Date of Birth" %>
-  <%= form.date_field :date_of_birth %>
+  <div>
+    <%= form.label :date_of_birth, "Date of Birth" %>
+    <%= form.date_field :date_of_birth %>
+  </div>
 
-  <%= form.submit %>
+  <div class="form-actions">
+    <%= form.submit "Update Profile" %>
+    <%= link_to "Cancel", profile_path, class: "btn-secondary" %>
+  </div>
 <% end %>

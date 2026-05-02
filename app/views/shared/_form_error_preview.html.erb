@@ -1,6 +1,10 @@
 <% if model.errors.any? %>
-  <h3>The following is preventing this booking creation:</h3>
-  <% model.errors.full_messages.each do |message| %>
-    <p><%= message %></p>
-  <% end %>
+  <div class="error-preview">
+    <h3>The following is preventing this action:</h3>
+    <ul>
+      <% model.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
 <% end %>

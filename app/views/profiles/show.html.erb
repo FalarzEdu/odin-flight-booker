@@ -1,18 +1,28 @@
 <h1>Your Profile</h1>
 
-<div>
-  <p>Email</p>
-  <%= current_user.email %>
-</div>
-<div>
-  <p>Name</p>
-  <%= current_user.name.presence || "Absent" %>
-</div>
-<div>
-  <p>Date of Birth</p>
-  <%= current_user.date_of_birth.presence || "Absent" %>
+<% if notice %>
+  <div class="notice"><%= notice %></div>
+<% end %>
+
+<div class="info-card">
+  <h2>Profile Information</h2>
+
+  <div class="profile-field">
+    <h3>Email</h3>
+    <p><%= current_user.email %></p>
+  </div>
+
+  <div class="profile-field">
+    <h3>Name</h3>
+    <p><%= current_user.name.presence || "Not set" %></p>
+  </div>
+
+  <div class="profile-field">
+    <h3>Date of Birth</h3>
+    <p><%= current_user.date_of_birth.presence || "Not set" %></p>
+  </div>
 </div>
 
-<div>
-  <%= link_to "Edit Profile", edit_profile_path %>
+<div class="card-actions">
+  <%= link_to "Edit Profile", edit_profile_path, class: "btn" %>
 </div>
