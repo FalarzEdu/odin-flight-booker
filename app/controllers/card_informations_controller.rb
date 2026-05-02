@@ -24,7 +24,6 @@ class CardInformationsController < ApplicationController
     params.expect(card_information: [
       :owner_full_name,
       :number,
-      :verification_number,
       :owner_document
     ])
   end
