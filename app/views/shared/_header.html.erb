@@ -1,0 +1,18 @@
+<header class="site-header info-card">
+  <nav class="site-header__nav" aria-label="Primary">
+    <%= link_to 'Flights', flights_path, class: 'site-header__link' %>
+  </nav>
+
+  <% if user_signed_in? %>
+    <div class="site-header__actions">
+      <%= button_to 'Logout',
+                    destroy_user_session_path,
+                    method: :delete,
+                    class: 'btn site-header__button',
+                    form: { class: 'site-header__logout-form' },
+                    data: { turbo_confirm: 'Are you sure you want to sign out?' } %>
+    </div>
+  <% end %>
+</header>
+
+

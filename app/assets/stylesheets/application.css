@@ -253,3 +253,47 @@ section > div {
   text-decoration: none;
 }
 
+/* Site Header */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.site-header__link {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--link-hover-color);
+}
+
+.site-header__link:hover {
+  color: var(--link-color);
+}
+
+.site-header__actions,
+.site-header__logout-form {
+  display: flex;
+  align-items: center;
+}
+
+.site-header__logout-form {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+.site-header__button {
+  margin: 0;
+}
+
