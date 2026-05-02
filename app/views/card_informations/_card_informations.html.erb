@@ -1,6 +1,32 @@
-<% card_informations.each do |card_information_unit| %>
-  <p>Card Owner</p>
-  <p><%= card_information_unit.owner_full_name %></p>
-<% end %>
+<div class="info-card">
+  <h2>Card Details</h2>
 
-<%= link_to "Create new Card", new_card_information_path %>
+  <% if card_informations.any? %>
+    <div class="profile-cards-grid">
+      <% card_informations.each do |card_information_unit| %>
+        <div class="profile-card-item">
+          <div class="profile-field">
+            <h3>Owner</h3>
+            <p><%= card_information_unit.owner_full_name %></p>
+          </div>
+
+          <div class="profile-field">
+            <h3>Number</h3>
+            <p><%= card_information_unit.number %></p>
+          </div>
+
+          <div class="profile-field">
+            <h3>Document</h3>
+            <p><%= card_information_unit.owner_document %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="profile-empty-state">You do not have any saved cards yet.</p>
+  <% end %>
+
+  <div class="card-actions">
+    <%= link_to "Create new Card", new_card_information_path, class: "btn" %>
+  </div>
+</div>

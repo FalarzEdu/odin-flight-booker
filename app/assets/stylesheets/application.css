@@ -379,3 +379,29 @@ section > div {
   text-decoration: none;
 }
 
+.profile-cards-grid {
+  display: grid;
+  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-bottom: 12px;
+}
+
+.profile-card-item {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 14px;
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.profile-card-item .profile-field:last-child {
+  margin-bottom: 0;
+}
+
+
+.profile-empty-state {
+  border: 1px dashed var(--border-color);
+  border-radius: 8px;
+  padding: 12px;
+  color: #a0a0a0;
+}
+
