@@ -3,6 +3,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable, :rememberable, :recoverable and :omniauthable
   devise :database_authenticatable, :registerable, :validatable
 
+  has_many :card_informations
+
   validates :date_of_birth, comparison: {
                                           greater_than_or_equal_to: 120.year.ago,
                                           lesser_than: -> { Time.current },

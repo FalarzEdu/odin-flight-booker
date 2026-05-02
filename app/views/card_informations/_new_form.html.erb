@@ -1,0 +1,15 @@
+<%= form_with model: card_information do |form| %>
+  <%= form.label :owner_full_name, "Card Owner Full Name" %>
+  <%= form.text_field :owner_full_name %>
+
+  <%= form.label :number, "Card Number" %>
+  <%= form.text_field :number %>
+
+  <%= form.label :verification_number, "Card Verification Number" %>
+  <%= form.number_field :verification_number %>
+
+  <%= form.label :owner_document, "Card Owner Document" %>
+  <%= form.text_field :owner_document %>
+
+  <%= form.submit "Create Card" %>
+<% end %>

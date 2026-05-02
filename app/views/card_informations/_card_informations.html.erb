@@ -1,0 +1,6 @@
+<% card_informations.each do |card_information_unit| %>
+  <p>Card Owner</p>
+  <p><%= card_information_unit.owner_full_name %></p>
+<% end %>
+
+<%= link_to "Create new Card", new_card_information_path %>

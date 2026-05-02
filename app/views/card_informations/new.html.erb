@@ -1,0 +1,5 @@
+<h1>Create a new card</h1>
+
+<%= render partial: "shared/form_error_preview", locals: { model: @card_information } %>
+
+<%= render partial: "new_form", locals: { card_information: @card_information } %>

@@ -26,3 +26,5 @@
 <div class="card-actions">
   <%= link_to "Edit Profile", edit_profile_path, class: "btn" %>
 </div>
+
+<%= render partial: "card_informations/card_informations", locals: { card_informations: current_user.card_informations } %>
