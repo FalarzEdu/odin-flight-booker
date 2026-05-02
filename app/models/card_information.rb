@@ -6,4 +6,6 @@ class CardInformation < ApplicationRecord
   validates :verification_number, numericality: { only_integer: true },
                                        length: { minimum: 3, maximum: 4 }
   validates :user, presence: true
+
+  enum :active, { inactive: 0, active: 1 }, default: :active
 end
