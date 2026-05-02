@@ -1,0 +1,18 @@
+<h1>Your Profile</h1>
+
+<div>
+  <p>Email</p>
+  <%= current_user.email %>
+</div>
+<div>
+  <p>Name</p>
+  <%= current_user.name.presence || "Absent" %>
+</div>
+<div>
+  <p>Date of Birth</p>
+  <%= current_user.date_of_birth.presence || "Absent" %>
+</div>
+
+<div>
+  <%= link_to "Edit Profile", edit_profile_path %>
+</div>

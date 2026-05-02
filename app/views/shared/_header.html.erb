@@ -1,6 +1,7 @@
 <header class="site-header info-card">
   <nav class="site-header__nav" aria-label="Primary">
     <%= link_to 'Flights', flights_path, class: 'site-header__link' %>
+    <%= link_to 'Profile', profile_path, class: 'site-header__link' %>
   </nav>
 
   <% if user_signed_in? %>
