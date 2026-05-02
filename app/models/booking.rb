@@ -23,7 +23,7 @@ class Booking < ApplicationRecord
   private
 
   def flight_must_be_in_the_future
-    if flight.present? && flight.departure_datetime < Date.current
+    if flight.present? && flight.departure_datetime < Time.current
       errors.add(:base, "Cannot book a flight that has already departed.")
     end
   end

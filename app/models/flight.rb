@@ -16,7 +16,7 @@ class Flight < ApplicationRecord
 
   validates :route, presence: true
 
-  scope :upcoming, -> { where("departure_datetime >= ?", Date.current) }
+  scope :upcoming, -> { where("departure_datetime >= ?", Time.current) }
 
   scope :with_departure_airport, ->(id) {
     joins(:route).where(routes: { departure_airport_id: id })
