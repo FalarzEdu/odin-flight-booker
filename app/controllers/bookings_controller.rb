@@ -1,4 +1,7 @@
 class BookingsController < ApplicationController
+  def index
+    @bookings = current_user.bookings
+  end
   def show
     @booking = Booking.find(params[:id])
   end
@@ -16,7 +19,7 @@ class BookingsController < ApplicationController
   end
 
   def create
-    @booking = Booking.new(booking_params)
+    @booking = current_user.bookings.build(booking_params)
 
     if @booking.save
       redirect_to @booking, notice: "Booking was successfully created."
