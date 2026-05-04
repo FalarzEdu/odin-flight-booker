@@ -17,6 +17,10 @@ class Booking < ApplicationRecord
   validate :passengers_count_within_limit, on: :create
   validates_associated :passengers
 
+  scope :with_airport_codes, -> {
+    includes(flight: { route: [ :departure_airport, :arrival_airport ] })
+  }
+
   def passengers_limit
     4
   end

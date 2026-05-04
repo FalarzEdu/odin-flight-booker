@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   def index
-    @bookings = current_user.bookings
+    @bookings = current_user.bookings.with_airport_codes
   end
   def show
     @booking = Booking.find(params[:id])
