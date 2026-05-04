@@ -1,0 +1,17 @@
+<div class="info-card">
+  <h2>Details:</h2>
+
+  <p>
+    Departure Airport:
+    <%= booking.flight.route.departure_airport.name %>
+    (<%= booking.flight.route.departure_airport.code %>)
+  </p>
+  <p>
+    Arrival Airport:
+    <%= booking.flight.route.arrival_airport.name %>
+    (<%= booking.flight.route.arrival_airport.code %>)
+  </p>
+  <p>Estimated flight duration: <%= booking.flight.flight_duration %> minutes</p>
+  <p>Number of Passengers: <%= booking.passengers.count %></p>
+  <p>Status> <%= booking.status %></p>
+</div>
