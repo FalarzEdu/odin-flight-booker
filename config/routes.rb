@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :flights, only: [ :index ]
-  resources :bookings, only: [ :new, :create, :show ]
+  resources :bookings, only: [ :index, :new, :create, :show ]
   resource :profile, only: [ :show, :edit, :update ]
   resources :card_informations
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
