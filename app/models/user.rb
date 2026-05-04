@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :validatable
 
   has_many :card_informations
+  has_many :bookings
 
   validates :date_of_birth, comparison: {
                                           greater_than_or_equal_to: 120.year.ago,
