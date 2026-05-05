@@ -3,7 +3,7 @@ class CardInformation < ApplicationRecord
   has_many :card_payments
 
   validates :number, :owner_full_name, :owner_document, presence: true
-  validates :active, inclusion: { in: [true, false] }
+  validates :active, inclusion: { in: [ true, false ] }
   validates :user, presence: true
 
   scope :active, -> { where(active: true) }
