@@ -11,7 +11,7 @@ class BookingPaymentsController < ApplicationController
   def create
     @booking = current_user.bookings.find(params[:booking_id])
 
-    return abort_operation if @booking.confirmed?
+    return unless valid_operation?
 
     begin
       begin_payment_operation
@@ -23,8 +23,23 @@ class BookingPaymentsController < ApplicationController
 
   private
 
-  def abort_operation
-    flash[:warning] = "This booking was already paid for."
+  def valid_operation?
+    if @booking.confirmed?
+      abort_operation("booking has already been paid for")
+      return false
+    end
+
+    is_card_payment = params[:payment][:type] == "card_payment"
+    if is_card_payment && !credit_card_owner?(params[:card_information_id])
+      abort_operation("this card does not belong to this account")
+      return false
+    end
+
+    true
+  end
+
+  def abort_operation(message)
+    flash[:warning] = "Payment denied: #{message}."
     redirect_to booking_path(@booking)
   end
 
@@ -33,10 +48,15 @@ class BookingPaymentsController < ApplicationController
       method: params[:payment][:type],
       params: {
         booking: @booking,
-        total_being_paid: @booking.flight.price
+        total_being_paid: @booking.flight.price,
+        card_information_id: params[:card_information_id]
       }
     )
 
     payment_processor.call
+  end
+
+  def credit_card_owner?(id)
+    current_user.card_informations.find_by(id:)
   end
 end
