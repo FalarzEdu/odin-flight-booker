@@ -33,7 +33,7 @@ class BookingPaymentsController < ApplicationController
   end
 
   def abort_operation
-    flash[:warn] = "This booking was already paid for."
+    flash[:warning] = "This booking was already paid for."
     redirect_to booking_path(@booking)
   end
 
