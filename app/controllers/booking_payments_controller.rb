@@ -1,6 +1,4 @@
 class BookingPaymentsController < ApplicationController
-  before_action :set_payment, only: %i[ show ]
-
   def new
     @card_information = current_user.card_informations.active
     @booking = current_user.bookings.with_flight.find(params[:booking_id])
@@ -8,9 +6,6 @@ class BookingPaymentsController < ApplicationController
     return abort_operation if @booking.confirmed?
 
     @payment = Payment.new
-  end
-
-  def show
   end
 
   def create
@@ -27,10 +22,6 @@ class BookingPaymentsController < ApplicationController
   end
 
   private
-
-  def set_payment
-    @payment = Payment.find(params[:id])
-  end
 
   def abort_operation
     flash[:warning] = "This booking was already paid for."

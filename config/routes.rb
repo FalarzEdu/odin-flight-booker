@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :flights, only: [ :index ]
   resources :bookings, only: [ :index, :new, :create, :show ] do
-    resources :booking_payments, as: :payments, only: [ :new, :create, :show ]
+    resources :booking_payments, as: :payments, only: [ :new, :create ]
   end
   resource :profile, only: [ :show, :edit, :update ]
   resources :card_informations
