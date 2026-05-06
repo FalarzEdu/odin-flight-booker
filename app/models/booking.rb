@@ -21,8 +21,21 @@ class Booking < ApplicationRecord
     includes(flight: { route: [ :departure_airport, :arrival_airport ] })
   }
 
+  scope :with_flight, ->() {
+    includes(:flight)
+  }
+
   def passengers_limit
     4
+  end
+
+  def update_payment_situation(total_being_paid, booking)
+    total_price = booking.flight.price
+    if booking_completely_paid?(total_price, total_being_paid, booking)
+      booking.update!(status: :confirmed, total_paid: total_price)
+    else
+      booking.update!(total_paid: @updated_paid_value)
+    end
   end
 
   private
@@ -37,5 +50,13 @@ class Booking < ApplicationRecord
     if passengers.size > passengers_limit
       errors.add(:base, "You can't book more than #{passengers_limit} at once.")
     end
+  end
+
+  def booking_completely_paid?(total_price, total_being_paid, booking)
+    total_already_paid = booking.total_paid
+    total_remaining = total_price - total_already_paid
+    @updated_paid_value = total_remaining - total_being_paid
+
+    @updated_paid_value <= 0
   end
 end
