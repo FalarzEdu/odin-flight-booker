@@ -1,0 +1,2 @@
+module BookingPaymentsHelper
+end
