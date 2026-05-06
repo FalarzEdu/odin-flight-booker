@@ -1,0 +1,24 @@
+<h2>Select Payment Method</h2>
+<p>Total to pay: <%= number_to_currency(@booking.flight.price) %></p>
+
+<%= form_with model: [@booking, @payment], local: true do |f| %>
+
+  <div class="payment-method">
+    <%= f.radio_button :type, "pix_payment", id: "pix_payment" %>
+    <%= f.label :pay_pix, "Pay with PIX" %>
+  </div>
+
+  <div class="payment-method">
+    <%= f.radio_button :type, "card_payment", id: "card_payment" %>
+    <%= f.label :pay_card, "Credit Card" %>
+
+    <div id="card-selection-fields">
+      <%= select_tag :card_information_id,
+                     options_from_collection_for_select(@card_information, :id, :number),
+                     include_blank: "Use a new card" %>
+
+    </div>
+  </div>
+
+  <%= f.submit "Confirm Payment", class: "btn" %>
+<% end %>
