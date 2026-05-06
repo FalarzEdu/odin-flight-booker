@@ -26,5 +26,4 @@ class BookingPaymentProcessor < PaymentProcessor
 
     booking.update_payment_situation(total_being_paid, booking)
   end
-
 end
