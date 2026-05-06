@@ -22,7 +22,6 @@
           <div id="card-selection-fields" style="display: none; margin-top: 10px;">
             <%= select_tag :card_information_id,
                            options_from_collection_for_select(@card_information, :id, :number),
-                           include_blank: "Use a new card",
                            class: "card-select" %>
           </div>
         </div>
