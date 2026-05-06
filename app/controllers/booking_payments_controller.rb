@@ -57,6 +57,6 @@ class BookingPaymentsController < ApplicationController
   end
 
   def credit_card_owner?(id)
-    current_user.card_informations.find_by(id:)
+    current_user.card_informations.find_by(id:).present?
   end
 end
