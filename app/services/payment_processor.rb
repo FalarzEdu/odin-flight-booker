@@ -28,7 +28,6 @@ class PaymentProcessor
   end
 
   def process_credit_card
-    card_id = @params[:card_information_id]
-    CardPayment.create!(card_information_id: card_id)
+    CardPayment.create!(card_information_id: @params[:card_information_id])
   end
 end
