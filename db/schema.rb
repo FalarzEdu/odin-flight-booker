@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_04_021940) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_05_223943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -84,12 +84,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_021940) do
 
   create_table "payments", force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, null: false
+    t.bigint "booking_id", null: false
     t.datetime "created_at", null: false
-    t.bigint "payable_id", null: false
-    t.string "payable_type", null: false
+    t.bigint "payment_method_id", null: false
+    t.string "payment_method_type", null: false
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
-    t.index ["payable_type", "payable_id"], name: "index_payments_on_payable"
+    t.index ["booking_id"], name: "index_payments_on_booking_id"
+    t.index ["payment_method_type", "payment_method_id"], name: "index_payments_on_payable"
   end
 
   create_table "pix_payments", force: :cascade do |t|
@@ -129,6 +131,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_04_021940) do
   add_foreign_key "card_payments", "card_informations"
   add_foreign_key "flights", "routes"
   add_foreign_key "passengers", "bookings"
+  add_foreign_key "payments", "bookings"
   add_foreign_key "routes", "airports", column: "arrival_airport_id"
   add_foreign_key "routes", "airports", column: "departure_airport_id"
 end
