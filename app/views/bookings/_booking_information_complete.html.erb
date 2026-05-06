@@ -13,5 +13,9 @@
   </p>
   <p>Estimated flight duration: <%= booking.flight.flight_duration %> minutes</p>
   <p>Number of Passengers: <%= booking.passengers.count %></p>
-  <p>Status> <%= booking.status %></p>
+  <p>Status: <%= booking.status %></p>
+
+  <% if booking.pending_payment? %>
+    <%= link_to "Pay this booking", new_booking_payment_path(booking) %>
+  <% end %>
 </div>
