@@ -1,24 +1,46 @@
-<h2>Select Payment Method</h2>
-<p>Total to pay: <%= number_to_currency(@booking.flight.price) %></p>
-
-<%= form_with model: [@booking, @payment], local: true do |f| %>
-
-  <div class="payment-method">
-    <%= f.radio_button :type, "pix_payment", id: "pix_payment" %>
-    <%= f.label :pay_pix, "Pay with PIX" %>
+<div class="payment-container">
+  <h2>Select Payment Method</h2>
+  <div class="info-card">
+    <p><strong>Total to pay:</strong> <%= number_to_currency(@booking.flight.price) %></p>
   </div>
 
-  <div class="payment-method">
-    <%= f.radio_button :type, "card_payment", id: "card_payment" %>
-    <%= f.label :pay_card, "Credit Card" %>
+  <%= form_with model: [@booking, @payment], local: true do |f| %>
 
-    <div id="card-selection-fields">
-      <%= select_tag :card_information_id,
-                     options_from_collection_for_select(@card_information, :id, :number),
-                     include_blank: "Use a new card" %>
+    <div class="payment-options">
+      <label class="payment-method" for="pix_payment">
+        <input type="radio" id="pix_payment" name="payment[type]" value="pix_payment">
+        <div class="payment-method-content">
+          <span class="payment-method-title">Pay with PIX</span>
+          <p class="payment-description">Fast and secure instant payment</p>
+        </div>
+      </label>
 
+      <label class="payment-method" for="card_payment">
+        <input type="radio" id="card_payment" name="payment[type]" value="card_payment">
+        <div class="payment-method-content">
+          <span class="payment-method-title">Credit Card</span>
+          <div id="card-selection-fields" style="display: none; margin-top: 10px;">
+            <%= select_tag :card_information_id,
+                           options_from_collection_for_select(@card_information, :id, :number),
+                           include_blank: "Use a new card",
+                           class: "card-select" %>
+          </div>
+        </div>
+      </label>
     </div>
-  </div>
 
-  <%= f.submit "Confirm Payment", class: "btn" %>
-<% end %>
+    <div class="form-actions">
+      <%= f.submit "Confirm Payment", class: "btn" %>
+      <%= link_to "Cancel", booking_path(@booking), class: "btn-secondary" %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+  document.getElementById('pix_payment').addEventListener('change', () => {
+    document.getElementById('card-selection-fields').style.display = 'none';
+  });
+  document.getElementById('card_payment').addEventListener('change', () => {
+    document.getElementById('card-selection-fields').style.display = 'block';
+  });
+</script>

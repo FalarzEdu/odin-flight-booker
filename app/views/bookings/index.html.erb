@@ -1,5 +1,15 @@
-<h1>Your Bookings</h1>
+<div class="bookings-container">
+  <h1>Your Bookings</h1>
 
-<% @bookings.each do |booking| %>
-  <%= render partial: "booking_information_complete", locals: { booking: } %>
-<% end %>
+  <% if @bookings.empty? %>
+    <div class="info-card">
+      <p>You haven't made any bookings yet. <%= link_to "Book a flight", flights_path %></p>
+    </div>
+  <% else %>
+    <div class="bookings-list">
+      <% @bookings.each do |booking| %>
+        <%= render partial: "booking_information_complete", locals: { booking: } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

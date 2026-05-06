@@ -1,10 +1,23 @@
-<h1>Booking</h1>
+<h1>Booking Details</h1>
 
 <div class="info-card">
-  <h2>Details:</h2>
+  <h2>Flight Information</h2>
+  <p><strong>From:</strong> <%= @booking.flight.route.departure_airport.code %></p>
+  <p><strong>To:</strong> <%= @booking.flight.route.arrival_airport.code %></p>
+  <p><strong>Departure:</strong> <%= @booking.flight.departure_datetime.strftime("%b %d, %Y at %I:%M %p") %></p>
+</div>
 
-  <p>Passengers on this booking: <%= @booking.passengers.count %></p>
-  <p>Total price of the flight: <%= @booking.flight.price %></p>
-  <p>Total paid: <%= @booking.total_paid %></p>
-  <p>Booking status: <%= @booking.status %></p>
+<div class="info-card">
+  <h2>Booking Summary</h2>
+  <p><strong>Passengers:</strong> <%= @booking.passengers.count %></p>
+  <p><strong>Flight Price:</strong> <%= number_to_currency(@booking.flight.price) %></p>
+  <p><strong>Total Paid:</strong> <%= number_to_currency(@booking.total_paid) %></p>
+  <p><strong>Status:</strong> <span class="status-badge <%= @booking.status %>"><%= @booking.status.titleize %></span></p>
+</div>
+
+<div class="form-actions">
+  <% unless @booking.confirmed? %>
+    <%= link_to "Proceed to Payment", new_booking_payment_path(@booking), class: "btn" %>
+  <% end %>
+  <%= link_to "Back to Bookings", bookings_path, class: "btn-secondary" %>
 </div>
