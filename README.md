@@ -160,6 +160,6 @@ This screen is simply direct access to all bookings for the current user.
 This project was a great opportunity to really grasp some concepts I've studied at Odin's Rails course. Some of my main
 focuses had me thinking and rebuilding some parts of this project a few
 times. For instance, I had a little bit of trouble understanding and applying UI collections using rails helpers and 
-dealing with nested attributes. Beyond that, I need to perform some refactors on my database and models because of a
+dealing with nested attributes. Beyond that, I performed some refactors on my database and models because of a
 misconception on how polymorphic relations really work. Besides these, my overall experience was very fluid.
 
