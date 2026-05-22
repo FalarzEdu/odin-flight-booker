@@ -5,11 +5,11 @@ class BookingPaymentProcessor < PaymentProcessor
 
   private
 
-  def process_pix
+  def process_pix_payment
     finalize_payment(super)
   end
 
-  def process_credit_card
+  def process_card_payment
     finalize_payment(super)
   end
 

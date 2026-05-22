@@ -5,19 +5,12 @@ class PaymentProcessor
   end
 
   def call
-    case @method
-    when "pix_payment"
-      process_pix
-    when "card_payment"
-      process_credit_card
-    else
-      raise "Unknown payment method"
-    end
+    send("process_#{@method}")
   end
 
   private
 
-  def process_pix
+  def process_pix_payment
     PixPayment.create!(
       issuing_bank: "Fake bank",
       transaction_id: "fake_id",
@@ -27,7 +20,7 @@ class PaymentProcessor
     )
   end
 
-  def process_credit_card
+  def process_card_payment
     CardPayment.create!(card_information_id: @params[:card_information_id])
   end
 end
